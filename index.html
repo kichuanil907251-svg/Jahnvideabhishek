@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Jahnvi 💖</title>
+<style>
+:root{--sky1:#0b1033;--sky2:#2a1a5e;--gold:#ffd98a;--ink:#f6f1ff;--glass:rgba(255,255,255,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;height:100%;overflow:hidden;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(ellipse at 70% 10%,var(--sky2),var(--sky1) 70%);background-color:#0b1033}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.moon{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);right:10px;width:130px;height:130px;filter:drop-shadow(0 0 16px rgba(255,217,138,.75));z-index:3}
+.moon path{fill:var(--gold)}
+.moon text{fill:#2a1a5e;font-family:Georgia,serif;font-weight:700;letter-spacing:1px}
+.page{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;text-align:center;z-index:2}
+.card{max-height:88vh;overflow-y:auto}.gold{color:var(--gold);font-size:24px;font-style:italic;margin-top:18px}
+.back{margin-top:22px;background:transparent;color:var(--gold);font-size:16px;padding:8px 22px}
+.bigheart{font-size:64px;margin-bottom:8px;animation:beat 1.2s infinite}
+.fh{position:fixed;bottom:-40px;z-index:1;pointer-events:none;user-select:none;animation:floatup linear forwards}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes floatup{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.page.active{display:flex;animation:fade 1.2s ease}
+.card{max-width:420px;width:100%;padding:36px 22px;border-radius:26px;background:var(--glass);border:1px solid rgba(255,217,138,.35);box-shadow:0 0 60px rgba(150,120,255,.25)}
+.small{letter-spacing:.3em;font-size:12px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-style:italic;font-weight:400;font-size:clamp(28px,7.5vw,40px);line-height:1.25;margin:0 0 28px}
+.btns{display:flex;gap:16px;justify-content:center;align-items:center;min-height:64px;flex-wrap:wrap}
+button{font:inherit;font-size:19px;padding:12px 30px;border-radius:999px;cursor:pointer;border:1px solid var(--gold)}
+#yes{background:var(--gold);color:#2a1a5e;box-shadow:0 0 24px rgba(255,217,138,.6)}
+#no{background:transparent;color:var(--gold)}
+p{font-size:19px;line-height:1.6;margin:10px 0 0;opacity:.92}
+svg{width:100%;max-width:300px;height:auto;margin-bottom:10px;overflow:visible}
+.line{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:260;stroke-dashoffset:260;animation:draw 2.5s .5s forwards}
+.star{fill:var(--gold);filter:drop-shadow(0 0 8px var(--gold));animation:pulse 2s infinite}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pulse{50%{opacity:.55}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<svg class="moon" viewBox="0 0 120 120" aria-label="Moon made of the letters JAHNVI">
+  <path d="M60 10 A50 50 0 0 1 60 110 A28 50 0 0 0 60 10 Z"/>
+  <defs><path id="mid" d="M85.1 31.1 A39 39 0 0 1 85.1 90.9"/></defs>
+  <text font-size="12"><textPath href="#mid" textLength="66" lengthAdjust="spacing">JAHNVI</textPath></text>
+</svg>
+
+<div class="page active" id="p1">
+  <div class="card">
+    <div class="small">Question for my moon</div>
+    <h1>Njan vitt povum nn thonnunnundo</h1>
+    <div class="btns">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="p2">
+  <div class="card">
+    <h1>ayye mandi penn 😂</h1>
+    <p>Njan povulaaa (athin mele nee enne vidulallo 😗)</p>
+    <button class="back">← Back</button>
+  </div>
+</div>
+
+<div class="page" id="p3">
+  <div class="card">
+    <p>Correct answer...njn angne povuo ithrem ishtapett ithrem snehicha Njan povuo...</p>
+    <p>Enik inem Sneham thernm 😗... Apo choikum Sneham thann theeruo nn</p>
+    <p>Noo ..enik lifeeeeelonggggg thernmmm</p>
+    <p>enik athrem athrem ninne ishtadeee 😂😗</p>
+    <p class="gold">Love you mera JAANNN...🤍</p>
+    <button class="back">← Back</button>
+  </div>
+</div>
+
+<script>
+var cv=document.getElementById('sky'), cx=cv.getContext('2d'), stars=[], shoot=null;
+function size(){cv.width=innerWidth;cv.height=innerHeight;stars=[];for(var i=0;i<140;i++)stars.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.5+.3,p:Math.random()*6});}
+size();addEventListener('resize',size);
+function frame(t){
+  cx.clearRect(0,0,cv.width,cv.height);
+  stars.forEach(function(s){cx.globalAlpha=.4+.6*Math.abs(Math.sin(t/1000+s.p));cx.fillStyle='#fff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();});
+  if(!shoot&&Math.random()<.004)shoot={x:Math.random()*cv.width,y:Math.random()*cv.height*.4,l:0};
+  if(shoot){cx.globalAlpha=1-shoot.l/60;cx.strokeStyle='#ffd98a';cx.lineWidth=2;cx.beginPath();cx.moveTo(shoot.x,shoot.y);cx.lineTo(shoot.x-40,shoot.y-20);cx.stroke();shoot.x+=9;shoot.y+=4.5;shoot.l++;if(shoot.l>60)shoot=null;}
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+var yes=document.getElementById('yes'), no=document.getElementById('no');
+function go(id){
+  document.getElementById('p1').classList.remove('active');
+  document.getElementById(id).classList.add('active');
+}
+yes.addEventListener('click',function(){go('p2');});
+no.addEventListener('click',function(){go('p3');});
+document.querySelectorAll('.back').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.getElementById('p2').classList.remove('active');
+    document.getElementById('p3').classList.remove('active');
+    document.getElementById('p1').classList.add('active');
+  });
+});
+
+setInterval(function(){
+  if(document.getElementById('p1').classList.contains('active'))return;
+  var e=document.createElement('div');
+  e.className='fh';
+  e.textContent=['💖','💕','💗','❤️','🌸','💞'][Math.floor(Math.random()*6)];
+  e.style.left=Math.random()*100+'vw';
+  e.style.fontSize=(18+Math.random()*26)+'px';
+  e.style.animationDuration=(5+Math.random()*4)+'s';
+  document.body.appendChild(e);
+  setTimeout(function(){e.remove()},9500);
+},350);
+</script>
+</body>
+</html>
